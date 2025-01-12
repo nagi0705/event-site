@@ -1,0 +1,14 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "title": "イベント1",
+      "description": "説明文1"
+    },
+    {
+      "id": 2,
+      "title": "イベント2",
+      "description": "説明文2"
+    }
+  ]
+}
