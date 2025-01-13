@@ -20,11 +20,18 @@
                     </NuxtLink>
                 </div>
             </div>
-            <!-- About ページへのリンクを追加 -->
-            <div class="mt-8">
-                <NuxtLink to="/about" class="text-blue-500 underline">
-                    このサイトについて（About ページ）
-                </NuxtLink>
+            <!-- About ページと Contact ページへのリンクを追加 -->
+            <div class="mt-8 space-y-2">
+                <div>
+                    <NuxtLink to="/about" class="text-blue-500 underline">
+                        このサイトについて（About ページ）
+                    </NuxtLink>
+                </div>
+                <div>
+                    <NuxtLink to="/contact" class="text-blue-500 underline">
+                        お問い合わせ（Contact ページ）
+                    </NuxtLink>
+                </div>
             </div>
         </main>
     </div>
@@ -70,5 +77,10 @@ header {
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
+}
+
+.space-y-2>div {
+    margin-bottom: 10px;
+    /* リンク間の余白を追加 */
 }
 </style>
