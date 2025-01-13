@@ -7,6 +7,10 @@
             <h2 class="text-xl font-bold">{{ event.title }}</h2>
             <p>{{ event.date }} - {{ event.location }}</p>
             <p>{{ event.description }}</p>
+            <!-- 戻るボタン -->
+            <NuxtLink to="/" class="mt-4 inline-block text-blue-500 underline">
+                戻る
+            </NuxtLink>
         </main>
         <div v-else>
             <p>イベント情報を読み込んでいます...</p>
