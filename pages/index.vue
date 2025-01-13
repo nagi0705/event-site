@@ -14,6 +14,10 @@
                     <h3 class="text-lg font-bold">{{ event.title }}</h3>
                     <p>{{ event.date }} - {{ event.location }}</p>
                     <p>{{ event.description }}</p>
+                    <!-- 詳細リンクを追加 -->
+                    <NuxtLink :to="`/events/${event.id}`" class="text-blue-500 underline">
+                        詳細を見る
+                    </NuxtLink>
                 </div>
             </div>
         </main>
@@ -22,7 +26,6 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useFetch } from '#app';
 
 // イベントデータ
 const events = ref([]);
@@ -30,17 +33,17 @@ const events = ref([]);
 // データを取得する関数
 const fetchEvents = async () => {
     try {
-        const response = await fetch('http://localhost:3000/mock/events.json')
-        const data = await response.json()
-        events.value = data.events
+        const response = await fetch('http://localhost:3000/mock/events.json');
+        const data = await response.json();
+        events.value = data.events;
     } catch (error) {
-        console.error('Error details:', error)
+        console.error('Error details:', error);
     }
-}
+};
 
 onMounted(() => {
-    fetchEvents()
-})
+    fetchEvents();
+});
 </script>
 
 <style>
