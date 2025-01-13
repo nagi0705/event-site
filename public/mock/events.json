@@ -3,11 +3,15 @@
     {
       "id": 1,
       "title": "イベント1",
+      "date": "2025-01-20",
+      "location": "東京",
       "description": "説明文1"
     },
     {
       "id": 2,
       "title": "イベント2",
+      "date": "2025-01-21",
+      "location": "大阪",
       "description": "説明文2"
     }
   ]

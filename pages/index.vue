@@ -10,28 +10,7 @@
             <div v-if="events.length === 0">イベントを読み込んでいます...</div>
             <div v-else>
                 <!-- イベント一覧の表示 -->
-                <div class="event-card mb-4 p-4 border rounded" v-for="event in events" :key="event.id">
-                    <h3 class="text-lg font-bold">{{ event.title }}</h3>
-                    <p>{{ event.date }} - {{ event.location }}</p>
-                    <p>{{ event.description }}</p>
-                    <!-- 詳細リンクを追加 -->
-                    <NuxtLink :to="`/events/${event.id}`" class="text-blue-500 underline">
-                        詳細を見る
-                    </NuxtLink>
-                </div>
-            </div>
-            <!-- About ページと Contact ページへのリンクを追加 -->
-            <div class="mt-8 space-y-2">
-                <div>
-                    <NuxtLink to="/about" class="text-blue-500 underline">
-                        このサイトについて（About ページ）
-                    </NuxtLink>
-                </div>
-                <div>
-                    <NuxtLink to="/contact" class="text-blue-500 underline">
-                        お問い合わせ（Contact ページ）
-                    </NuxtLink>
-                </div>
+                <EventCard v-for="event in events" :key="event.id" :event="event" />
             </div>
         </main>
     </div>
@@ -39,6 +18,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import EventCard from '~/components/EventCard.vue';
 
 // イベントデータ
 const events = ref([]);
@@ -70,17 +50,5 @@ onMounted(() => {
 header {
     text-align: center;
     margin-bottom: 20px;
-}
-
-.event-card {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.space-y-2>div {
-    margin-bottom: 10px;
-    /* リンク間の余白を追加 */
 }
 </style>

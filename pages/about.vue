@@ -10,12 +10,7 @@
             <p>
                 制作者情報: このプロジェクトは Nuxt.js を使って作成されました。
             </p>
-            <!-- トップページへのリンクを追加 -->
-            <div class="mt-8">
-                <NuxtLink to="/" class="text-blue-500 underline">
-                    トップページに戻る
-                </NuxtLink>
-            </div>
+            
         </main>
     </div>
 </template>
