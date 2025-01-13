@@ -20,6 +20,12 @@
                     </NuxtLink>
                 </div>
             </div>
+            <!-- About ページへのリンクを追加 -->
+            <div class="mt-8">
+                <NuxtLink to="/about" class="text-blue-500 underline">
+                    このサイトについて（About ページ）
+                </NuxtLink>
+            </div>
         </main>
     </div>
 </template>
