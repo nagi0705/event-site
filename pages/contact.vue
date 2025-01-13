@@ -10,7 +10,8 @@
                 <!-- 名前 -->
                 <div>
                     <label for="name" class="block font-medium mb-1">名前</label>
-                    <input type="text" id="name" v-model="form.name" class="w-full border rounded p-2" required />
+                    <input type="text" id="name" v-model="form.name" class="w-full border rounded p-2" required
+                        minlength="3" />
                 </div>
 
                 <!-- メールアドレス -->
@@ -22,8 +23,8 @@
                 <!-- 本文 -->
                 <div>
                     <label for="message" class="block font-medium mb-1">本文</label>
-                    <textarea id="message" v-model="form.message" class="w-full border rounded p-2" rows="4"
-                        required></textarea>
+                    <textarea id="message" v-model="form.message" class="w-full border rounded p-2" rows="4" required
+                        minlength="10"></textarea>
                 </div>
 
                 <!-- 送信ボタン -->
@@ -31,7 +32,8 @@
                     送信
                 </button>
             </form>
-            <!-- トップページへのリンクを追加 -->
+
+            <!-- トップページに戻るリンク -->
             <div class="mt-8">
                 <NuxtLink to="/" class="text-blue-500 underline">
                     トップページに戻る
@@ -53,6 +55,10 @@ const form = reactive({
 
 // フォーム送信時の処理
 const handleSubmit = () => {
+    if (!form.name || !form.email || !form.message) {
+        alert("全ての項目を正しく入力してください。");
+        return;
+    }
     console.log("送信内容:", form);
     alert(`送信が完了しました！\n名前: ${form.name}\nメール: ${form.email}\n本文: ${form.message}`);
 };
@@ -69,5 +75,9 @@ const handleSubmit = () => {
 header {
     text-align: center;
     margin-bottom: 20px;
+}
+
+textarea {
+    resize: none;
 }
 </style>
