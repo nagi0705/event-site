@@ -7,10 +7,7 @@
             <h2 class="text-xl font-bold">{{ event.title }}</h2>
             <p>{{ event.date }} - {{ event.location }}</p>
             <p>{{ event.description }}</p>
-            <!-- 戻るボタン -->
-            <NuxtLink to="/" class="mt-4 inline-block text-blue-500 underline">
-                戻る
-            </NuxtLink>
+            <NuxtLink to="/" class="mt-4 inline-block text-blue-500 underline">戻る</NuxtLink>
         </main>
         <div v-else>
             <p>イベント情報を読み込んでいます...</p>
@@ -21,23 +18,17 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute } from "#app";
+import { useHead } from "#app";
 
-// イベントデータを格納する変数
 const event = ref(null);
-
-// 現在のルートから ID を取得
 const route = useRoute();
 
-// データを取得する関数
 const fetchEvent = async () => {
     try {
-        // データを取得
         const response = await fetch('http://localhost:3000/mock/events.json');
         const data = await response.json();
-
-        // イベント ID に基づいて該当するイベントを取得
         if (data && data.events) {
-            const id = parseInt(route.params.id, 10); // IDを整数に変換
+            const id = parseInt(route.params.id, 10);
             event.value = data.events.find(e => e.id === id);
         }
     } catch (error) {
@@ -45,10 +36,31 @@ const fetchEvent = async () => {
     }
 };
 
-// ページが読み込まれたときにデータを取得
 onMounted(() => {
     fetchEvent();
 });
+
+useHead(() => ({
+    title: event.value ? `${event.value.title} - イベント詳細` : 'イベント詳細',
+    meta: [
+        {
+            name: 'description',
+            content: event.value ? event.value.description : 'イベントの詳細情報を表示します。',
+        },
+        {
+            property: 'og:title',
+            content: event.value ? event.value.title : 'イベント詳細',
+        },
+        {
+            property: 'og:description',
+            content: event.value ? event.value.description : 'イベントの詳細情報を表示します。',
+        },
+        {
+            property: 'og:image',
+            content: '/event-og-image.jpg',
+        },
+    ],
+}));
 </script>
 
 <style>

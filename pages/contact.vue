@@ -5,7 +5,6 @@
             <p>以下のフォームに必要事項を入力してください。</p>
         </header>
         <main>
-            <!-- フォームコンポーネントを使用 -->
             <FormContact />
         </main>
     </div>
@@ -13,6 +12,29 @@
 
 <script setup>
 import FormContact from "@/components/FormContact.vue";
+import { useHead } from "#app";
+
+useHead({
+    title: 'イベント紹介サイト - お問い合わせ',
+    meta: [
+        {
+            name: 'description',
+            content: 'イベントに関するお問い合わせは、こちらのフォームをご利用ください。',
+        },
+        {
+            property: 'og:title',
+            content: 'お問い合わせ - イベント紹介サイト',
+        },
+        {
+            property: 'og:description',
+            content: 'イベントに関するお問い合わせは、こちらのフォームをご利用ください。',
+        },
+        {
+            property: 'og:image',
+            content: '/contact-og-image.jpg',
+        },
+    ],
+});
 </script>
 
 <style>

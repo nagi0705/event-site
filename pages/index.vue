@@ -6,10 +6,9 @@
         </header>
         <main>
             <h2 class="text-xl font-bold mt-6 mb-4">イベント一覧</h2>
-            <!-- データの読み込み状態を表示 -->
-            <div v-if="events.length === 0">イベントを読み込んでいます...</div>
+            <div v-if="loading">イベントを読み込んでいます...</div>
+            <div v-else-if="events.length === 0">現在、イベント情報がありません。</div>
             <div v-else>
-                <!-- イベント一覧の表示 -->
                 <EventCard v-for="event in events" :key="event.id" :event="event" />
             </div>
         </main>
@@ -18,24 +17,60 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useHead, useNuxtApp } from '#app';
 import EventCard from '~/components/EventCard.vue';
 
-// イベントデータ
-const events = ref([]);
+// ミドルウェアの設定
+definePageMeta({
+    middleware: ['logger']
+});
 
-// データを取得する関数
+// データ用の変数
+const events = ref([]);
+const loading = ref(true);
+
+// Axiosのインスタンスを取得
+const { $axios } = useNuxtApp();
+
+// データ取得用の関数
 const fetchEvents = async () => {
     try {
-        const response = await fetch('http://localhost:3000/mock/events.json');
-        const data = await response.json();
-        events.value = data.events;
+        const response = await $axios.get('/mock/events.json'); // Axiosを使用
+        events.value = response.data.events || [];
     } catch (error) {
-        console.error('Error details:', error);
+        console.error('Error fetching events:', error);
+        events.value = [];
+    } finally {
+        loading.value = false;
     }
 };
 
+// ページロード時にデータ取得
 onMounted(() => {
     fetchEvents();
+});
+
+// SEO の設定
+useHead({
+    title: 'イベント紹介サイト - トップページ',
+    meta: [
+        {
+            name: 'description',
+            content: '地域イベントや趣味のコミュニティイベントを紹介するサイトです。',
+        },
+        {
+            property: 'og:title',
+            content: 'イベント紹介サイト',
+        },
+        {
+            property: 'og:description',
+            content: '地域イベントや趣味のコミュニティイベントを紹介するサイトです。',
+        },
+        {
+            property: 'og:image',
+            content: '/default-og-image.jpg',
+        },
+    ],
 });
 </script>
 
