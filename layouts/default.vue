@@ -3,34 +3,61 @@
         <!-- ヘッダー -->
         <header class="bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md">
             <nav class="container mx-auto flex justify-between items-center py-4 px-6">
-                <h1 class="text-3xl font-bold tracking-wide">イベント紹介サイト</h1>
-                <ul class="flex space-x-6 text-lg font-medium">
+                <h1 class="text-2xl md:text-3xl font-bold tracking-wide">イベント紹介サイト</h1>
+                <!--<div class="md:hidden">-->
+                <!-- ハンバーガーメニューボタン -->
+                <!--<button @click="toggleMenu" class="focus:outline-none md:hidden">
+                    <span class="block w-6 h-0.5 bg-white mb-1"></span>
+                    <span class="block w-6 h-0.5 bg-white mb-1"></span>
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                </button>
+                <!--</div>-->
+                <ul :class="[
+                    'text-lg font-medium',
+                    menuOpen ? 'block' : 'hidden',
+                    'md:flex md:space-x-6 md:flex-row flex-col'
+                ]" class="hidden md:flex">
                     <li>
-                        <NuxtLink to="/" class="hover:underline">ホーム</NuxtLink>
+                        <NuxtLink to="/" class="hover:underline py-2 md:py-0">ホーム</NuxtLink>
                     </li>
                     <li>
-                        <NuxtLink to="/about" class="hover:underline">About</NuxtLink>
+                        <NuxtLink to="/about" class="hover:underline py-2 md:py-0">About</NuxtLink>
                     </li>
                     <li>
-                        <NuxtLink to="/contact" class="hover:underline">お問い合わせ</NuxtLink>
+                        <NuxtLink to="/contact" class="hover:underline py-2 md:py-0">お問い合わせ</NuxtLink>
                     </li>
                 </ul>
             </nav>
         </header>
 
         <!-- メインコンテンツ -->
-        <main class="flex-grow container mx-auto py-12 px-6 bg-gray-50 shadow-inner">
+        <main class="flex-grow container mx-auto py-6 px-4 md:py-12 md:px-6 bg-gray-50 shadow-inner">
             <slot />
         </main>
 
         <!-- フッター -->
         <footer class="bg-gray-800 text-white">
-            <div class="container mx-auto py-6 text-center">
-                <p class="text-sm">© 2025 イベント紹介サイト. All Rights Reserved.</p>
+            <div class="container mx-auto py-4 md:py-6 text-center">
+                <p class="text-xs md:text-sm">© 2025 イベント紹介サイト. All Rights Reserved.</p>
             </div>
         </footer>
     </div>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            menuOpen: false,
+        };
+    },
+    methods: {
+        toggleMenu() {
+            this.menuOpen = !this.menuOpen;
+        },
+    },
+};
+</script>
 
 <style>
 .container {
@@ -65,27 +92,21 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 24px;
-    /* 上下左右の余白 */
+    padding: 12px 20px;
+    /* モバイル時に少し余白を減らす */
 }
 
 /* サイトタイトル */
 header h1 {
-    font-size: 1.75rem;
-    /* サイズを少し大きく */
+    font-size: 1.5rem;
+    /* モバイル時のサイズ調整 */
     font-weight: bold;
     letter-spacing: 1px;
-    /* 文字間隔 */
     transition: color 0.2s ease-in-out;
-    /* ホバー時のスムーズな変化 */
 }
-
 
 /* ナビゲーションのスタイル */
 header nav ul {
-    display: flex;
-    gap: 16px;
-    /* リンク間の間隔 */
     list-style: none;
     margin: 0;
     padding: 0;
@@ -95,33 +116,34 @@ header nav ul {
 header nav ul li a {
     color: rgb(77, 78, 82);
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 0.875rem;
+    /* モバイル時はtext-sm相当 */
     font-weight: 500;
     padding: 8px 12px;
-    /* リンクの内側余白 */
     border-radius: 4px;
-    /* 丸みを追加 */
     transition: all 0.3s ease-in-out;
 }
 
 header nav ul li a:hover {
     background-color: #ffffff;
-    /* ホバー時の背景色 */
     color: #4a90e2;
-    /* テキストを青色に */
 }
 
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
     header .container {
         flex-direction: column;
-        /* ナビゲーションを縦並びに */
         align-items: flex-start;
     }
 
     header nav ul {
         flex-direction: column;
         gap: 12px;
+    }
+
+    header h1 {
+        font-size: 1.25rem;
+        /* モバイル時はさらに小さく */
     }
 }
 </style>

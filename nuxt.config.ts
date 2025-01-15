@@ -3,5 +3,6 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   nitro: {
     static: true
-  }
+  },
+  css: ['@/assets/css/tailwind.css'],
 });
