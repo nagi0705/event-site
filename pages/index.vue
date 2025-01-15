@@ -23,15 +23,20 @@ const events = ref([]);
 const loading = ref(true);
 
 const fetchEvents = async () => {
-    try {
-        const response = await fetch("/mock/events.json"); // 修正したURL
-        const data = await response.json();
-        events.value = data.events || [];
-    } catch (error) {
-        console.error(error);
-    } finally {
-        loading.value = false;
-    }
+    // ダミーデータの取得コードをコメントアウト
+    // try {
+    //     const response = await fetch("/mock/events.json");
+    //     const data = await response.json();
+    //     events.value = data.events || [];
+    // } catch (error) {
+    //     console.error(error);
+    // } finally {
+    //     loading.value = false;
+    // }
+
+    // ダミーデータなしで空配列を設定
+    events.value = [];
+    loading.value = false;
 };
 
 onMounted(() => {
