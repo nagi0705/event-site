@@ -24,7 +24,7 @@ const loading = ref(true);
 
 const fetchEvents = async () => {
     try {
-        const response = await fetch("http://localhost:3000/mock/events.json");
+        const response = await fetch("/mock/events.json"); // 修正したURL
         const data = await response.json();
         events.value = data.events || [];
     } catch (error) {
